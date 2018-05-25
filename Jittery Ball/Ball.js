@@ -1,5 +1,5 @@
 function Ball(){
-    this.r = 45;
+    this.r = 5;
     this.x = random(this.r, width-this.r);
     this.y = random(this.r, height-this.r);
     

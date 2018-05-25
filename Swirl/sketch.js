@@ -5,8 +5,8 @@ var num = 1000;
 function setup(){
     createCanvas(1000,1000);
     for(var i = 0; i < num; i++){
-        balls[i] = new Ball((width-20)*i/num/2, 0);        
-        //balls[i] = new Ball(random(width/2-20), 0);   
+        //balls[i] = new Ball((width-20)*i/num/2, 0);        
+        balls[i] = new Ball(random(width/2-20), random(360));   
     }
 }
 

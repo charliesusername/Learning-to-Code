@@ -3,17 +3,15 @@ function Ball(d, a){
     this.a = a*PI/180;
     this.originX = width/2;
     this.originY = height/2;
-    this.r = map(this.d,0,width,3,40);
-    //this.r = 10;
+    //this.r = map(this.d,0,width,3,40);
+    this.r = random(10);
     this.x = this.originX + this.d * sin(this.a)/2;
     this.y = this.originY + this.d * cos(this.a)/2;
     this.num = 0;
-
     
     //this.x = random(this.r, width-this.r);
     //this.y = random(this.r, height-this.r);
-    this.col = color(255, 204, 0);
-    
+    this.col = color(255, 255, 255);    
 
     this.create = function(){
         fill(this.col);
@@ -32,34 +30,35 @@ function Ball(d, a){
         }
     }
 
-    this.quadrant = function(){
+    this.quadrant = function(){    
         if(this.num % 9 === 0){
-            this.col = color('red');   
+            this.col = color('purple');   
         } else if(this.num % 9 === 1){
-            this.col = color('white');   
+            this.col = color('green');   
         } else if(this.num % 9 === 2){
             this.col = color('blue');   
         } else if(this.num % 9 === 3){
-            this.col = color('red');   
+            this.col = color('purple');   
         } else if(this.num % 9 === 4){
-            this.col = color('white');   
+            this.col = color('green');   
         } else if(this.num % 9 === 5){
             this.col = color('blue');   
         } else if(this.num % 9 === 6){
-            this.col = color('red');   
+            this.col = color('purple');   
         } else if(this.num % 9 === 7){
-            this.col = color('white');   
+            this.col = color('green');   
         } else if(this.num % 9 === 8){
             this.col = color('blue');   
         }
     }
 
     this.update = function(){     
-        this.a += map(this.d, 0,width/2,6*PI/180,0.001*PI/180); 
-        this.num = floor(this.a / (PI/9));
+        this.a += map(this.d, 0, 10,0.0001,0.0010); 
+        this.d += random(-2,2);
+        this.a += 0.001*PI;
+        this.num = floor(this.a / (PI/18));
         this.quadrant();
-        fill(this.col);
-         
+        fill(this.col);         
         
         this.x = this.originX + this.d * cos(this.a);
         this.y = this.originY + this.d * sin(this.a);
