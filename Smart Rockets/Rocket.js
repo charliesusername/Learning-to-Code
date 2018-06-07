@@ -3,11 +3,12 @@ function Rocket(dna) {
     this.pos = createVector(width / 2, height - 10);
     this.vel = createVector();
     this.acc = createVector();
+    this.trail = [];
     this.completed = false;
     this.crashed = false;
     this.dna = dna ? dna : new DNA();
     this.fitness = 0;
-    this.deathCount;
+    this.deathCount = 0;
 
     this.applyForce = function (force) {
         this.acc.add(force);
@@ -17,7 +18,6 @@ function Rocket(dna) {
     this.calcFitness = function () {
         var d = dist(this.pos.x, this.pos.y, target.x, target.y);
 
-        // 
         this.fitness = map(d, 0, width, width, 0);
 
         if (this.completed) {
@@ -39,6 +39,7 @@ function Rocket(dna) {
             && this.pos.y > ry && this.pos.y < ry + rh
             || this.pos.y > height) {
             this.crashed = true;
+            this.deathCount = count;
         }
         //hits right  or left wall
         if (this.pos.x > width || this.pos.x < 0) {
@@ -47,10 +48,7 @@ function Rocket(dna) {
         // hits ceiling
         if (this.pos.y < 0) {
             this.vel.y *= -1;
-        }
-        if(!this.crashed){
-            this.deathCount = count;
-        }
+        }     
 
         this.applyForce(this.dna.genes[count]);
 
@@ -60,6 +58,8 @@ function Rocket(dna) {
             this.acc.mult(0);
             this.vel.limit(4);
         }
+
+        
     }
 
     this.show = function () {
@@ -68,8 +68,15 @@ function Rocket(dna) {
         rotate(this.vel.heading());
         rectMode(CENTER);
         noStroke();
-        fill(255, 100);
-        rect(0, 0, 25, 5);
+        fill(255, 180);
+        rect(0, 0, 8, 3);
         pop();
+
+       /*  for (var i = 1; i < this.trail.length; i++) {
+            noStroke();
+            fill(255);
+            line(this.trail[i].pos.x, this.trail[i].pos.y,
+                this.trail[i - 1].pos.x, this.trail[i-1].pos.y);
+        } */
     }
 }

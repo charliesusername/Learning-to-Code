@@ -48,9 +48,10 @@ function Population() {
         for (var i = 0; i < this.popsize; i++) {
             this.rockets[i].update();
             this.rockets[i].show();
-            if (this.rockets[i].crashed) {
-                this.numCrashed++
+            if(this.rockets[i].crashed){
+                this.numCrashed++;
             }
         }
+        
     }
 }
